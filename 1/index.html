@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microphone animations</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="./style.css">
+    <script src="./microphone.js"></script> 
+    <script src="./visualiser.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body onload="main()">
+    <canvas id="myCanvas"></canvas>
+
+    <!-- Modal -->
+    <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="aboutModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="aboutModalLabel">About this Project</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    This is an audio visualiser project. It uses the Web Audio API to analyse the audio data from the microphone and create a visual representation of the sound.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="authorModal" tabindex="-1" role="dialog" aria-labelledby="authorModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="authorModalLabel">About the Author</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    This is a project by Joe Bloggs. His other work can be seen here: <a href="https://github.com/joe-bloggs">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Menu</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="openControls()">Open Controls</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#aboutModal">About this Project</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#authorModal">About the Author</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Controls -->
+<div class="controls" id="controls" style="display: none;">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Controls</h5>
+        <div class="form-group">
+          <label for="colour">Colour:</label>
+          <input type="color" class="form-control" id="colour" value="#ff0000">
+        </div>
+        <div class="form-group">
+            <label for="sensitivity">Sensitivity:
+              <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top" title="Affects the following variables:
+                Volume: x1.5
+                Zoom: x0.5
+                Rotation: x2"></i>
+            </label>
+            <input type="range" class="form-control" id="sensitivity" min="0" max="100" value="50">
+          </div>
+        <div class="form-group">
+          <label for="pattern-count">Pattern Count:</label>
+          <div class="input-group">
+            <button class="btn btn-secondary" id="decrement-pattern-count">-</button>
+            <input type="number" class="form-control" id="pattern-count" value="1" readonly>
+            <button class="btn btn-secondary" id="increment-pattern-count">+</button>
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="randomise()">Randomiser</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
